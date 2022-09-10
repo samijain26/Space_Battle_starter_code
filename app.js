@@ -68,11 +68,10 @@ function playerAccuracyCheck() {
     if (Math.random()< USSHELLOWORLD.accuracy) {
       Enemy[i].hull -= USSHELLOWORLD.firepower;
     
-      confirm(
-        `Way to go you hit Alien Ship ${counter}, Now its hull is ${Enemy[i].hull}`
+      alert(`Way to go you hit Alien Ship ${counter}, Now its hull is ${Enemy[i].hull}`
       );
     } else{
-        confirm(`you had a miss. it's alien ${counter} survived to attack`) 
+        alert(`you had a miss. it's alien ${counter} survived to attack`) 
      }
   }
   //function to decide enemy winning for hit or miss
@@ -80,11 +79,10 @@ function playerAccuracyCheck() {
     if (Math.random()< Enemy[i].accuracy) {
         USSHELLOWORLD.hull -= Enemy[i].firepower;
      
-      confirm(
-        `you  got a hit from Alien Ship ${counter}, Now your updated hull is ${USSHELLOWORLD.hull}`
+      alert( `you  got a hit from Alien Ship ${counter}, Now your updated hull is ${USSHELLOWORLD.hull}`
       );
     } else{
-       confirm(`Alien ${counter} had a miss. it's your turn to attack`) 
+       alert(`Alien ${counter} had a miss. it's your turn to attack`) 
     }
   }
 
@@ -103,8 +101,7 @@ function playerAttack() {
    
     
     if (beginMsg==1){
-  confirm(
-    "Our planet is in danger, and you are the chosen one to save it"
+alert("Our planet is in danger, and you are the chosen one to save it"
   );
   beginMsg ++
     }
@@ -116,7 +113,7 @@ function playerAttack() {
     setTimeout(enemyAttack,2000);
   }
   if(USSHELLOWORLD.hull <= 0){
-    confirm("You lost all your hull.Battle over. Alien took over the land")
+    alert("You lost all your hull.Battle over. Alien took over the land")
   }
   
 }
@@ -126,19 +123,26 @@ function enemyAttack() {
  // console.log(`the enemy counter value is ${enemyCounter}`);
   
   if (Enemy[i].hull > 0 && USSHELLOWORLD.hull > 0) {
-        confirm(`Alien Ship ${counter} is attacking now`);
+        alert(`Alien Ship ${counter} is attacking now`);
 
         alienAccuracyCheck();
         statusUpdate();
         setTimeout(playerAttack,1500);
   
     }else if (USSHELLOWORLD.hull <= 0) {
-    confirm("Game Over, You could not save the earth");
+    alert("Game Over, You could not save the earth");
   
     } else { 
-   //check if all alien ship destroyed
+   //check if all alien ship destroyed.if user want to replay then they can restart the game
         if(counter == 6){
-            confirm("All Alien ship got destroyed. We saved our land. We won")
+         playagain= confirm("We won!!.All Alien ship got destroyed. We saved our land.  Do you want to restart the game?, choose Ok for yes,otherwise choose Cancel to stop" )
+            if(playagain ){
+                alert("you chose to fight the battle again")
+            location.reload()
+            }
+           else{
+            alert("Ok! Next time be more strong before attacking us. Ha Ha!!")
+            }
         }
         //condition to find if user want to retreat
         else{
@@ -156,7 +160,7 @@ function enemyAttack() {
                 setTimeout(playerAttack,1500);
             } 
             else {
-                confirm("You retreated. Good Job!!! Game over. ");
+                alert("You retreated. Good Job!!! Game over. ");
             }
          }
     
